@@ -171,18 +171,22 @@ export function AddressIntakePage() {
           {/* FR-07: surfaced before analysis starts, not after. */}
           {added.cross_case_matches.length > 0 && (
             <Banner
-              tone="warning"
-              title={`This address already appears in ${added.cross_case_matches.length} other case${
+              tone="info"
+              title={`Address also appears in ${added.cross_case_matches.length} other case${
                 added.cross_case_matches.length === 1 ? '' : 's'
               }`}
+              className="border-dashed"
             >
-              <p>Another officer may already be working this address. Coordinate before acting.</p>
-              <ul className="mt-2 flex flex-wrap gap-2">
+              <p>
+                This shared address is shown for coordination. Review the linked case file before
+                starting a new trace.
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2">
                 {added.cross_case_matches.map((match) => (
                   <li key={match.case_id}>
                     <Link
                       to={`/cases/${match.case_id}`}
-                      className="font-mono font-medium underline underline-offset-2"
+                      className="inline-flex items-center rounded-[var(--radius-sm)] border border-[var(--info-border)] bg-[var(--surface)] px-2.5 py-1 font-mono text-xs font-medium text-[var(--info-fg)] shadow-[var(--shadow-sm)] transition-colors hover:border-[var(--info-fg)] hover:bg-[var(--info-bg)]"
                     >
                       {match.case_number}
                     </Link>

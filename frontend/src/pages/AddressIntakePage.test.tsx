@@ -145,8 +145,13 @@ describe('suspect address intake', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Add address' }))
 
     await waitFor(() =>
-      expect(screen.getByText('This address already appears in 1 other case')).toBeInTheDocument(),
+      expect(screen.getByText('Address also appears in 1 other case')).toBeInTheDocument(),
     )
+    expect(
+      screen.getByText(
+        'This shared address is shown for coordination. Review the linked case file before starting a new trace.',
+      ),
+    ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'TF-2026-0091' })).toBeInTheDocument()
     // The warning is on screen while the analysis is still un-started.
     expect(screen.getByRole('button', { name: 'Start analysis' })).toBeInTheDocument()
